@@ -11,7 +11,7 @@ def splitter(name, parts = 100000):
     i = 0
     while i < len(lines):
         for item in lines[i:i+parts]:
-            f2 = open(name.split('.')[0]+ '/'name.split('.')[0]+ str(parts)+'.txt', 'a+', errors = 'ignore') 
+            f2 = open(name.split('.')[0]+ '/'name.split('.')[0]+ str(i)+'.txt', 'a+', errors = 'ignore') 
             f2.write(item)
             f2.close()
     i += parts

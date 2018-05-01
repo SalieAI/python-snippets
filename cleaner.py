@@ -22,5 +22,5 @@ def clean(string):
     input is : "   Hello World    " and output is "Hello World"
     '''
     nonempty = [string.index(item) for item in string if item != ' ']
-    nonemty2 = [string.index(item) for item in string[::-1] if item != ' ']
-    return string[nonempty[0]:nonempty[0]+1]
+    nonempty2 = [string[::-1].index(item) for item in string[::-1] if item != ' ']
+    return string[nonempty[0]:len(string) -nonempty2[0]]

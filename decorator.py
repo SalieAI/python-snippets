@@ -1,6 +1,19 @@
 '''
 Example of using decorator ...
 '''
+import time
+
+def lengthandtime(func):
+    
+    '''
+    decorator returning length of wrapped function with time note
+    '''
+    
+    def wrapper(*arg):
+        res = func(*arg)
+        print (len(res), time.asctime())
+        return res
+    return wrapper
 
 def milk(func):
     def wrapper(*arg):

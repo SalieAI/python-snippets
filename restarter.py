@@ -25,9 +25,9 @@ def restarter(interval = settings.interval, script = settings.script, threads = 
     parameters:
         interval: time in seconds between start of script and killing of script, e.g. : 10
         script: name of script, e.q. : 'helloworld.py'
-        threads: number of threads, default is 1 
+        threads: number of scripts, default is 1 
     '''
-    logger.debug(f'Starting {settings.script} will restart in {settings.time} seconds and after that there will be infinite loops with duration of {settings.time} seconds')
+    logger.debug(f'Starting {settings.script} will restart in {settings.interval}')
     while True:
         data = []
         for i in range(threads):

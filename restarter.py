@@ -1,6 +1,8 @@
 '''
 Date: August 2018
 Short script with CLI to be used for restarting others scripts 
+Restarter will first try to run choosen script with python3, if that will be unsuccesful will try to run with python
+which can be on most system python2
 '''
 import argparse
 import logging
@@ -11,8 +13,8 @@ logging.basicConfig(level=logging.DEBUG, format = '%(asctime)s %(levelname)s %(m
 logger = logging.getLogger(__name__)
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--script', action="store", dest="script")
-parser.add_argument('--time', action="store", dest="time", type=int)
+parser.add_argument('-s', '--script', action="store", dest="script", help = 'name of script, e.q. : helloworld.py')
+parser.add_argument('-t', '--time', action="store", dest="time", type=int, help = 'duration of loop in seconds, e.g. 10')
 settings = parser.parse_args()
 
 def restarter(interval = settings.time, script = settings.script):

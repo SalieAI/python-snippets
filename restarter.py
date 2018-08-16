@@ -1,8 +1,7 @@
 '''
 Date: August 2018
-Short script with CLI to be used for restarting others scripts 
-Restarter will first try to run choosen script with python3, if that will be unsuccesful will try to run with python
-which can be on most system python2
+Short script with CLI to be used for restarting others scripts.
+Parameters which can be defined script, duration of loop, number of threads 
 '''
 import argparse
 import logging
@@ -14,10 +13,11 @@ logger = logging.getLogger(__name__)
 
 parser = argparse.ArgumentParser()
 parser.add_argument('-s', '--script', action="store", dest="script", help = 'name of script, e.q. : helloworld.py')
-parser.add_argument('-t', '--time', action="store", dest="time", type=int, help = 'duration of loop in seconds, e.g. 10')
+parser.add_argument('-i', '--interval', action="store", dest="time", type=int, help = 'duration of loop in seconds, e.g. 10')
+parser.add_argument('-t', '--threads', action="store", dest="threads", type=int, default = 1, help = 'number of threads, default is 1')
 settings = parser.parse_args()
 
-def restarter(interval = settings.time, script = settings.script):
+def restarter(interval = settings.interval, script = settings.script, threads = settings.threads):
     '''
     starts script after defined interval of seconds will restart script and so on and so on
     infinite loop
@@ -25,15 +25,19 @@ def restarter(interval = settings.time, script = settings.script):
     parameters:
         interval: time in seconds between start of script and killing of script, e.g. : 10
         script: name of script, e.q. : 'helloworld.py'
+        threads: number of threads, default is 1 
     '''
     logger.debug(f'Starting {settings.script} will restart in {settings.time} seconds and after that there will be infinite loops with duration of {settings.time} seconds')
     while True:
-        try:
-            p = Popen(['python3', script])
-        except:
-            p = Popen(['python', script])
+        data = []
+        for i in range(threads):
+            try:
+                data.append(Popen(['python3', script]))
+            except:
+                data.append(Popen(['python', script]))
         time.sleep(interval)
-        p.kill()
+        for item in data:
+            item.kill()
     
 if __name__ == "__main__":
     restarter()

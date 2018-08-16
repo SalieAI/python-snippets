@@ -13,7 +13,7 @@ logger = logging.getLogger(__name__)
 
 parser = argparse.ArgumentParser()
 parser.add_argument('-s', '--script', action="store", dest="script", help = 'name of script, e.q. : helloworld.py')
-parser.add_argument('-i', '--interval', action="store", dest="time", type=int, help = 'duration of loop in seconds, e.g. 10')
+parser.add_argument('-i', '--interval', action="store", dest="interval", type=int, help = 'duration of loop in seconds, e.g. 10')
 parser.add_argument('-t', '--threads', action="store", dest="threads", type=int, default = 1, help = 'number of threads, default is 1')
 settings = parser.parse_args()
 
